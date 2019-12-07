@@ -52,5 +52,7 @@ class Spider
     float BottomDistance();
     int DefaultVerticalAngles = 30;
     int DefaulthorizontalAngles = 30;
+    bool Toched();
+    bool MoveDetect();
 };
 #endif
