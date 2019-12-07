@@ -229,3 +229,13 @@ float Spider::GetDistance()
   }
   return (upp);
 }
+
+bool Spider::Thoced()
+{
+  return(digitalRead(TochSensorPin) == HIGH);
+}
+
+bool Spider::MoveDetect()
+{
+  return(digitalRead(MovingSensorPin) == HIGH);
+}
