@@ -48,6 +48,7 @@ class Spider
     void Speak();
     void AlignAllLegs();////V
     void Straight();
+    void DLAY();
     float TopDistance();
     float BottomDistance();
     int DefaultVerticalAngles = 30;
