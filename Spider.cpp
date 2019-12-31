@@ -239,3 +239,8 @@ bool Spider::MoveDetect()
 {
   return(digitalRead(MovingSensorPin) == HIGH);
 }
+
+void Spider::DALY()
+{
+  
+}
