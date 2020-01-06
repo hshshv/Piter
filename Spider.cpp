@@ -1,6 +1,6 @@
 #include "Spider.h"
 
-Spider:: Spider(short newEchoPin1, short newTrigPin1, short newEchoPin2, short newTrigPin2, short newTochSensorPin, short newMoveingSensorPin, const short ServoPins[], int Speed)  :
+Spider:: Spider(short newEchoPin1, short newTrigPin1, short newEchoPin2, short newTrigPin2, short newTochSensorPin, short newMoveingSensorPin, const short ServoPins[], int Speed) :
   RightFront(ServoPins[0], false, ServoPins[1], true),
   RightBack(ServoPins[2], true, ServoPins[3], true),
   LeftFront(ServoPins[4], true, ServoPins[5], false),
@@ -32,7 +32,7 @@ Spider:: Spider() :
   Print();
 }
 
-void Spider:: Step(int LeftAngles, int RightAngles, int VerticalAngles)
+void Spider:: Step(int LeftAngles, int RightAngles, int VerticalAngles)//MAIN 'STEP'
 {
   LeftBack.Promote(LeftAngles, VerticalAngles);
 
@@ -51,6 +51,8 @@ void Spider:: Step(int LeftAngles, int RightAngles, int VerticalAngles)
   LeftBack.SwimAhed(LeftAngles);
   RightBack.Align();
   RightFront.Align();
+
+  AlignAllLegs();
 }
 
 void Spider::Step(int LeftAngles, int RightAngles)
@@ -81,7 +83,7 @@ void Spider::Step()
   {
     DefaultVerticalAngles = 30;
   }
-  
+
   Step(DefaulthorizontalAngles, DefaulthorizontalAngles, DefaultVerticalAngles);
 }
 
@@ -113,6 +115,14 @@ void Spider:: Speak()
   mp3_play (randNumber);
 }
 
+void Spider::AlignAllLegs()
+{
+  RightFront.Align();
+  RightBack.Align();
+  LeftFront.Align();
+  LeftBack.Align();
+}
+
 void Spider:: Hello()
 {
   mp3_play(1);
@@ -126,26 +136,28 @@ void Spider:: Sleep()
   RightBack.UpEngine.Goto(130);
   LeftFront.UpEngine.Goto(130);
   LeftBack.UpEngine.Goto(130);
+  SleepModeIsOn = true;
 }
 
 void Spider:: WakeUp()//needs Mouth.h
 {
   mp3_play (14);
   AlignAllLegs();
+  SleepModeIsOn = false;
 }
 
 void Spider:: Climb()
 {
   Straight();
-  while(GetDistance() > 4)
+  while (GetDistance() > 4)
   {
-    Step(10,10);
+    Step(10, 10);
   }
   Straight();
   /*
-   * כל החלק של הטיפוס: הזזת הרגליים 
-   */
-   AlignAllLegs();
+     כל החלק של הטיפוס: הזזת הרגליים
+  */
+  AlignAllLegs();
 }
 
 void Spider:: Print()
@@ -219,10 +231,21 @@ void Spider::Straight()///מוכן אך מפוקפק
   }
 }
 
+void Spider::GetDown()
+{
+  RightFront.Set(RightFront.DownEngine.GetDegrees() , 150);//לבדוק שכל העסק אכן מתיישר כראוי ולא שחלק עולים וחלק יורדים, אמור להיות בסדר כי חלק מהסרוויים נהפכים עם רוורס בהתאם למיקומם וכו', אבל עדיין לבדוק
+  RightBack.Set(RightBack.DownEngine.GetDegrees() , 150);
+  LeftFront.Set(LeftFront.DownEngine.GetDegrees() , 150);
+  LeftBack.Set(LeftBack.DownEngine.GetDegrees() , 150);
+  Speak();
+  delay(1000);
+  AlignAllLegs();
+}
+
 float Spider::GetDistance()
 {
-  float upp =  Up.Get();
-  float don =  Down.Get();
+  float upp =  Up.GetAvg();
+  float don =  Down.GetAvg();
   if (upp > don)
   {
     return (don);
@@ -230,17 +253,17 @@ float Spider::GetDistance()
   return (upp);
 }
 
-bool Spider::Thoced()
+bool Spider::Toched()
 {
-  return(digitalRead(TochSensorPin) == HIGH);
+  return (digitalRead(TochSensorPin) == HIGH);
 }
 
 bool Spider::MoveDetect()
 {
-  return(digitalRead(MovingSensorPin) == HIGH);
+  return (digitalRead(MoveingSensorPin) == HIGH);
 }
 
-void Spider::DALY()
+bool Spider::IsSleeping()
 {
-  
+  return (SleepModeIsOn);
 }

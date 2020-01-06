@@ -1,10 +1,9 @@
 #ifndef Leg_h
 #define Leg_h
 
-
-
 #include "Arduino.h"
 #include "SEngine.h"
+
 class Leg
 {
   private:

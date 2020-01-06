@@ -7,11 +7,14 @@ class UltrasonicSensor
   private:
     int TrigPin;
     int EchoPin;
-    
   public:
     UltrasonicSensor(int Trig, int Echo);
-    int StoppingDistance;
+    UltrasonicSensor();
+    void SetPins(int Trig, int Echo);
+    int StoppingDistance = 10;
     float Get();
+    float GetAvg();
+    float GetAvg(int times);
     bool Blocked();
 };
 #endif
