@@ -33,3 +33,16 @@ void IHaveBeenToched()
 {
   Piter.GetDown();
 }
+
+void CheckIfYouNeedToSleepOrToAttracAttention()
+{
+  if(Piter.TimeSinceIHaveBeenToched() > 60*1000)
+  {
+    Piter.AttracAttention();
+  }
+  
+  if(Piter.TimeSinceSomeoneWasHere() > 60*1000*3)
+  {
+    Piter.Sleep();
+  }
+}

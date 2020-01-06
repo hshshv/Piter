@@ -255,7 +255,12 @@ float Spider::GetDistance()
 
 bool Spider::Toched()
 {
-  return (digitalRead(TochSensorPin) == HIGH);
+  bool X = (digitalRead(TochSensorPin) == HIGH);
+  if (X)
+  {
+    LastTimeIHaveBeenToched = (unsigned long)millis();
+  }
+  return (X);
 }
 
 bool Spider::MoveDetect()
@@ -266,4 +271,14 @@ bool Spider::MoveDetect()
 bool Spider::IsSleeping()
 {
   return (SleepModeIsOn);
+}
+
+unsigned long Spider::TimeSinceIHaveBeenToched()
+{
+  return ((unsigned long)millis() - LastTimeIHaveBeenToched);
+}
+
+unsigned long Spider::TimeSinceSomeoneWasHere()
+{
+  return((unsigned long)millis() - LastTimeSomeoneWasHere);
 }

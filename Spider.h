@@ -31,6 +31,8 @@ class Spider
     short LegsPins[LegsPinsLength] = {1, 2, 3, 4, 5, 6, 7, 8};
     long randNumber;
     bool SleepModeIsOn = false;
+    unsigned long LastTimeIHaveBeenToched = (unsigned long)millis();
+    unsigned long LastTimeSomeoneWasHere = (unsigned long)millis();
   public:
     Spider(short newEchoPin1, short newTrigPin1, short newEchoPin2, short newTrigPin2, short newTochSensorPin, short newMoveingSensorPin, const short ServoPins[], int Speed);
     Spider();
@@ -57,5 +59,7 @@ class Spider
     bool Toched();
     bool MoveDetect();
     bool IsSleeping();
+    unsigned long TimeSinceIHaveBeenToched();
+    unsigned long TimeSinceSomeoneWasHere();
 };
 #endif
