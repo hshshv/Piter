@@ -73,7 +73,7 @@ void Spider::Step(int VerticalAngles)
   Step(DefaulthorizontalAngles, DefaulthorizontalAngles, VerticalAngles);
 }
 
-void Spider::Step()
+void Spider::Step(bool forward)
 {
   if (DefaulthorizontalAngles > 90 || DefaulthorizontalAngles < 1)
   {
@@ -83,10 +83,20 @@ void Spider::Step()
   {
     DefaultVerticalAngles = 30;
   }
-
-  Step(DefaulthorizontalAngles, DefaulthorizontalAngles, DefaultVerticalAngles);
+  if(forward)
+  {
+    Step(DefaulthorizontalAngles, DefaulthorizontalAngles, DefaultVerticalAngles);
+  }
+  else
+  {
+    Step(-DefaulthorizontalAngles, -DefaulthorizontalAngles, DefaultVerticalAngles);
+  }
 }
 
+void Spider::Step()
+{
+  Step(true);
+}
 
 void Spider:: AttracAttention()
 {
