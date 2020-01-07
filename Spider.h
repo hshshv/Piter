@@ -41,6 +41,7 @@ class Spider
     void Step(int VerticalAngles);///V
     void Step();
     //אולי להוסיף צעד אחורה או לא להוסיף ורק להתאים את סדר ההליכה למקרה שמעבירים לו מספר שלילי = אחורה
+    //לכאורה לא צריך, אפשר פשוט להעביר פרמטרים שליליים בתצורה הנוכחית של הקוד
     void AttracAttention();
     void Hello();
     void MakeNois();
