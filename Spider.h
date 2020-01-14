@@ -17,7 +17,7 @@ class Spider
   private:
     UltrasonicSensor Up;
     UltrasonicSensor Down;
-    float GetDistance();//V
+    
     Leg RightFront;
     Leg RightBack;
     Leg LeftFront;
@@ -50,6 +50,7 @@ class Spider
     void Climb();
     void Print();////V
     void Speak();
+    float GetDistance();//V
     void AlignAllLegs();////V
     void Straight();
     void GetDown();
@@ -62,5 +63,6 @@ class Spider
     bool IsSleeping();
     unsigned long TimeSinceIHaveBeenToched();
     unsigned long TimeSinceSomeoneWasHere();
+    bool Blocked();
 };
 #endif

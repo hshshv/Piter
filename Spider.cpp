@@ -292,3 +292,8 @@ unsigned long Spider::TimeSinceSomeoneWasHere()
 {
   return((unsigned long)millis() - LastTimeSomeoneWasHere);
 }
+
+bool Spider::Blocked()
+{
+  return(Up.Blocked() || Down.Blocked());
+}
