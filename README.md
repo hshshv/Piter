@@ -6,4 +6,4 @@ Easily build a robotic spider with the Piter Library, which allows you to accura
 <li>Arduino Mega</li>
 <li>PIR sensor</li>
 <li>2 ultrasonic sensors</li>
-<li>tach sensor</li>
+<li>touch sensor</li>
